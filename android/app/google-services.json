@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "724843818468",
+    "project_id": "nscet-ams",
+    "storage_bucket": "nscet-ams.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724843818468:android:8dcfcec528c60770562bf1",
+        "android_client_info": {
+          "package_name": "com.mukilan.nscet_ams"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724843818468-3j9f26aqqh6tt3h7fs4c64jnj34hvn75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7VMlMZkyR9_r9d2oDV1MutEV4-I-evyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724843818468-3j9f26aqqh6tt3h7fs4c64jnj34hvn75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
