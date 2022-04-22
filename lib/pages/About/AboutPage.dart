@@ -28,7 +28,7 @@ class _AboutPageState extends State<AboutPage> {
         children: [
           const SizedBox(height: 20.0),
           const Text(
-            "ABOUT US",
+            "ABOUT APP",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 24,
@@ -39,7 +39,7 @@ class _AboutPageState extends State<AboutPage> {
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: Text(
-              "Lorem ipsum dolor sit amet, nec admodum vivendo similique ad, id modo quas appetere has. Has ad melius sanctus expetenda. Vis sumo graecis ad, vix latine apeirian menandri cu",
+              "NSCET Attendance Management System developed to reduce time and effort taken to mark attendance.",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
