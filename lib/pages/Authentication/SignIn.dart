@@ -113,8 +113,8 @@ class _SignInState extends State<SignIn> {
                         if (_formkey.currentState!.validate()) {
                           dynamic result = await _auth.signIn(email, password);
                           if (result != null) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(getSnackBar(result.toString()));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                getSnackBar(result.message.toString()));
                           } else {
                             UserData userData = UserData();
                             userData.loadData2Local();

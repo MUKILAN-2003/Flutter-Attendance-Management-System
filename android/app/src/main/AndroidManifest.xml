@@ -7,7 +7,7 @@
     </intent>
   </queries>
    <application
-        android:label="nscet_ams"
+        android:label="NSCET AMS"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

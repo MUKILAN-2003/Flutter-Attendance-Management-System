@@ -34,7 +34,6 @@ class _SpecificClassAttedenceState extends State<SpecificClassAttedence> {
         builder: (context, snapshot) {
           final tilesList = <Widget>[];
           final regNos = <String>[];
-          final mobileNos = <int>[];
           final name = <String>[];
 
           if (snapshot.hasData && !snapshot.hasError && snapshot.data != null) {
@@ -85,7 +84,6 @@ class _SpecificClassAttedenceState extends State<SpecificClassAttedence> {
 
               for (int i = 0; i < studentOrders.length; i++) {
                 regNos.add(studentOrders[i]['reg_no']);
-                mobileNos.add(studentOrders[i]['mobile_number']);
                 name.add(studentOrders[i]['name']);
                 tilesList.add(ListTile(
                   title: Row(
@@ -148,7 +146,6 @@ class _SpecificClassAttedenceState extends State<SpecificClassAttedence> {
                                       isTimeFN: isTimeFN,
                                       presentList: present,
                                       regNoList: regNos,
-                                      mobileNoList: mobileNos,
                                       name: name);
                               if (result['value'] != null) {
                                 ScaffoldMessenger.of(context).showSnackBar(

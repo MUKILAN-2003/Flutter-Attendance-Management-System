@@ -47,44 +47,46 @@ class _SpecificClassState extends State<SpecificClass> {
                   type: FileType.custom,
                   allowedExtensions: ['xlsx'],
                 );
-                var bytes = File(result!.paths[0].toString()).readAsBytesSync();
-                var excel = Excel.decodeBytes(bytes);
+                if (result != null) {
+                  var bytes =
+                      File(result.paths[0].toString()).readAsBytesSync();
+                  var excel = Excel.decodeBytes(bytes);
 
-                var listStudents = [];
-                var what_show = 'Students added successfuly !';
-                for (var table in excel.tables.keys) {
-                  var i = 0;
-                  for (var row in excel.tables[table]!.rows) {
-                    if (i == 0) {
-                      if (row[0]!.value == 'Name' &&
-                          row[1]!.value == 'Roll Number' &&
-                          row[2]!.value == 'Mobile Number') {
-                        i = 1;
-                        continue;
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(getSnackBar("Check XLSX file !"));
-                        Navigator.pop(context, true);
-                        what_show = 'Check XLSX file !';
-                        break;
+                  var listStudents = [];
+                  var what_show = 'Students added successfuly !';
+                  for (var table in excel.tables.keys) {
+                    var i = 0;
+                    for (var row in excel.tables[table]!.rows) {
+                      if (i == 0) {
+                        if (row[0]!.value == 'Name' &&
+                            row[1]!.value == 'Roll Number') {
+                          i = 1;
+                          continue;
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(getSnackBar("Check XLSX file !"));
+                          Navigator.pop(context, true);
+                          what_show = 'Check XLSX file !';
+                          break;
+                        }
+                      }
+                      if (row.length >= 2) {
+                        listStudents.add([
+                          row[0]!.value,
+                          row[1]!.value,
+                        ]);
                       }
                     }
-                    if (row.length >= 3) {
-                      listStudents.add([
-                        row[0]!.value,
-                        row[1]!.value,
-                        row[2]!.value,
-                      ]);
+                    var addByXlsx =
+                        await studentDb.addStudentXLSX(listStudents);
+                    if (addByXlsx == 'ok') {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(getSnackBar(what_show));
+                      Navigator.pop(context, true);
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(getSnackBar("Try Again !"));
                     }
-                  }
-                  var addByXlsx = await studentDb.addStudentXLSX(listStudents);
-                  if (addByXlsx == null) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(getSnackBar(what_show));
-                    Navigator.pop(context, true);
-                  } else {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(getSnackBar("try Again !"));
                   }
                 }
               },
@@ -136,35 +138,6 @@ class _SpecificClassState extends State<SpecificClass> {
                                     onChanged: (val) {
                                       setState(() {
                                         newStudentName = val;
-                                      });
-                                    },
-                                  ),
-                                  TextFormField(
-                                    validator: (val) => val!.isEmpty
-                                        ? 'Enter Mobile Number'
-                                        : null,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Student Number',
-                                      labelStyle: TextStyle(
-                                          color: Color.fromRGBO(66, 53, 55, 1)),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                                Color.fromRGBO(199, 68, 109, 1),
-                                            width: 1.5),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                                Color.fromRGBO(199, 68, 109, 1),
-                                            width: 1.5),
-                                      ),
-                                    ),
-                                    cursorColor:
-                                        const Color.fromRGBO(199, 68, 109, 1),
-                                    onChanged: (val) {
-                                      setState(() {
-                                        newStudentNumber = val;
                                       });
                                     },
                                   ),

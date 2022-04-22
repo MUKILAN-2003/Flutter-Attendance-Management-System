@@ -198,7 +198,7 @@ class _RegisterState extends State<Register> {
                 items: const [
                   DropdownMenuItem(
                     child: Text("Science and Humanites"),
-                    value: "SNH",
+                    value: "S&H",
                   ),
                   DropdownMenuItem(
                     child: Text("Computer Science & Engineering"),
@@ -238,7 +238,7 @@ class _RegisterState extends State<Register> {
                         await _auth.register(email, password, name, role, dept);
                     if (result != null) {
                       ScaffoldMessenger.of(context)
-                          .showSnackBar(getSnackBar(result.toString()));
+                          .showSnackBar(getSnackBar(result.message.toString()));
                     }
                   }
                 },

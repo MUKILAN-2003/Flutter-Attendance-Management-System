@@ -37,7 +37,6 @@ class AttendenceDB {
   Future markAttendence(
       {required List presentList,
       required List regNoList,
-      required List mobileNoList,
       required bool isTimeFN,
       required List name,
       bool isUpdate = false}) async {
@@ -96,7 +95,6 @@ class AttendenceDB {
         "regNo": regNoList,
         "name": name,
         "attedenceList": presentList,
-        "mobileno": mobileNoList,
       });
       return {
         "value": null,
@@ -114,7 +112,6 @@ class AttendenceDB {
           "regNo": regNoList,
           "name": name,
           "attedenceList": presentList,
-          "mobileno": mobileNoList,
         });
 
         return {

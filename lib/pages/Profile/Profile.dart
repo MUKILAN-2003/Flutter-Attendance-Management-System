@@ -20,14 +20,23 @@ class _ProfileState extends State<Profile> {
   final _formkey = GlobalKey<FormState>();
   String newClassname = '';
   String dept = '';
+  String staffdept = ' ';
+  String staffname = ' ';
+  String staffrole = ' ';
   ProfileData profile_data = ProfileData();
   dynamic deptClasses = '';
-
   List<DropdownMenuItem<Object>> deptSpecificClasses = [];
 
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        staffdept = prefs.getString('dept')!;
+        staffname = prefs.getString('name')!;
+        staffrole = prefs.getString('role')!;
+      });
+    });
     profile_data.getClasses().then((value) {
       setState(() {
         deptClasses = value;
@@ -58,23 +67,17 @@ class _ProfileState extends State<Profile> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    "FULL NAME",
+                    staffname,
                     style: TextStyle(
                       fontSize: 22.0,
                     ),
                   ),
                   Text(
-                    "DEPARTMENT",
+                    staffdept + " - " + staffrole,
                     style: TextStyle(
                       fontSize: 18.0,
-                    ),
-                  ),
-                  Text(
-                    "ROLE",
-                    style: TextStyle(
-                      fontSize: 16.0,
                     ),
                   ),
                 ],
@@ -202,7 +205,7 @@ class _ProfileState extends State<Profile> {
                     items: const [
                       DropdownMenuItem(
                         child: Text("Science and Humanites"),
-                        value: "SNH",
+                        value: "S&H",
                       ),
                       DropdownMenuItem(
                         child: Text("Computer Science & Engineering"),

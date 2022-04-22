@@ -29,7 +29,6 @@ class _SpecificReportState extends State<SpecificReport> {
   List<dynamic> presentFN = <dynamic>[];
   List<dynamic> presentAN = <dynamic>[];
   List<dynamic> regno = <dynamic>[];
-  List<dynamic> mobile = <dynamic>[];
   List<dynamic> name = <dynamic>[];
   int total = 0;
   int noOfAbsenteesFN = 0;
@@ -48,7 +47,6 @@ class _SpecificReportState extends State<SpecificReport> {
           isThereReport = true;
           total = value['regNo'].length;
           regno = value['regNo'];
-          mobile = value['mobileno'];
           name = value['name'];
         });
         if (value["presentFN"] != null) {
@@ -228,7 +226,6 @@ class _SpecificReportState extends State<SpecificReport> {
                             dynamic result = await widget.report.sendReport(
                                 regno,
                                 name,
-                                mobile,
                                 presentFN,
                                 presentAN,
                                 widget.selectedDate,

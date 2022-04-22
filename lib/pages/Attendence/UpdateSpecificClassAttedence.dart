@@ -25,7 +25,6 @@ class _UpdateSpecificClassAttedenceState
     extends State<UpdateSpecificClassAttedence> {
   AttendenceDB attendenceDb = AttendenceDB(dept: null, className: null);
   List<dynamic> regno = [];
-  List<dynamic> mobno = [];
   List<dynamic> name = [];
   List<dynamic> presentFN = [];
   List<dynamic> presentAN = [];
@@ -47,16 +46,13 @@ class _UpdateSpecificClassAttedenceState
       if (result["FN"] != null) {
         List stuReNos = <String>[];
         List stuNames = <String>[];
-        List stuNumber = <int>[];
         for (int i = 0; i < result["FN"]['regNo'].length; i++) {
           stuReNos.add(result["FN"]['regNo'][i]);
           stuNames.add(result["FN"]['name'][i]);
-          stuNumber.add(result["FN"]['mobileno'][i]);
         }
         setState(() {
           regno = stuReNos;
           name = stuNames;
-          mobno = stuNumber;
           total = result["FN"]["total"];
           presentFN = result["FN"]["attedenceList"].toList();
           isAttedencemarkedFN = true;
@@ -74,12 +70,10 @@ class _UpdateSpecificClassAttedenceState
         for (int i = 0; i < result["FN"]['regNo'].length; i++) {
           stuReNos.add(result["FN"]['regNo'][i]);
           stuNames.add(result["FN"]['name'][i]);
-          stuNumber.add(result["FN"]['mobileno'][i]);
         }
         setState(() {
           regno = stuReNos;
           name = stuNames;
-          mobno = stuNumber;
           total = result["FN"]["total"];
           presentAN = result["AN"]["attedenceList"];
           isAttedencemarkedAN = true;
@@ -303,7 +297,6 @@ class _UpdateSpecificClassAttedenceState
                   presentList: isTimeFN ? presentFN : presentAN,
                   regNoList: regno,
                   name: name,
-                  mobileNoList: mobno,
                   isUpdate: true);
               if (result['value'] != null) {
                 ScaffoldMessenger.of(context)

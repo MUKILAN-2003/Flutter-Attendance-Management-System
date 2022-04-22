@@ -16,17 +16,16 @@ class StudentDb {
     for (var i = 0; i < listStudents.length; i++) {
       dynamic value = await classDb
           .orderByChild("reg_no")
-          .equalTo(listStudents[i][0])
+          .equalTo(listStudents[i][1])
           .once();
       if (value.value == null) {
         classDb.push().set({
           "name": listStudents[i][0].toString().toUpperCase(),
-          "reg_no": listStudents[i][1],
-          "mobile_number": listStudents[i][2]
+          "reg_no": listStudents[i][1]
         });
       }
     }
-    return null;
+    return "ok";
   }
 
   Future addStudent(stuName, stuRegno, mobile_number) async {
@@ -36,11 +35,9 @@ class StudentDb {
         await classDb.orderByChild("reg_no").equalTo(stuRegno).once();
 
     if (value.value == null) {
-      classDb.push().set({
-        "name": stuName.toString().toUpperCase(),
-        "reg_no": stuRegno,
-        "mobile_number": mobile_number
-      });
+      classDb
+          .push()
+          .set({"name": stuName.toString().toUpperCase(), "reg_no": stuRegno});
       return null;
     } else {
       return "Student already exist";

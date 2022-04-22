@@ -97,8 +97,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 "Password reset link sent to your registered mail address ."));
                             widget.toggleView(2);
                           } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(getSnackBar(result.toString()));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                getSnackBar(result.message.toString()));
                           }
                         }
                       },

@@ -36,7 +36,6 @@ class reportDB {
 
       dynamic regNo = result.value["FN"]['regNo'];
       dynamic name = result.value["FN"]['name'];
-      dynamic mobile = result.value["FN"]['mobileno'];
 
       if (resultFN != null && resultAN != null) {
         dynamic presentFN = resultFN["attedenceList"];
@@ -44,7 +43,6 @@ class reportDB {
         return {
           "regNo": regNo,
           "name": name,
-          "mobileno": mobile,
           "presentFN": presentFN,
           "presentAN": presentAN
         };
@@ -54,7 +52,6 @@ class reportDB {
         return {
           "regNo": result.value["FN"]['regNo'],
           "name": result.value["FN"]['name'],
-          "mobileno": mobile,
           "presentFN": presentFN,
           "presentAN": null
         };
@@ -64,7 +61,6 @@ class reportDB {
         return {
           "regNo": result.value["AN"]['regNo'],
           "name": result.value["AN"]['name'],
-          "mobileno": mobile,
           "presentFN": null,
           "presentAN": presentAN
         };
@@ -74,9 +70,9 @@ class reportDB {
   }
 
   void writeOnPdf(
-      regNo, name, mobile, presentFN, presentAN, selectedDate, selectedClass) {
+      regNo, name, presentFN, presentAN, selectedDate, selectedClass) {
     List<List<dynamic>> table = [
-      <dynamic>['Register No', 'Name', 'Forenoon', 'Afternoon', 'Mobile']
+      <dynamic>['Register No', 'Name', 'Forenoon', 'Afternoon']
     ];
     List<String> morningA = <String>[];
     List<String> afternoonA = <String>[];
@@ -110,7 +106,6 @@ class reportDB {
             name[i],
             morningA[i],
             afternoonA[i],
-            mobile[i]
           ]);
         }
       } else if (afternoonA[i] == 'Absent X') {
@@ -119,7 +114,6 @@ class reportDB {
           name[i],
           morningA[i],
           afternoonA[i],
-          mobile[i]
         ]);
       }
     }
@@ -157,9 +151,9 @@ class reportDB {
             child: pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: <pw.Widget>[
-                  pw.Text('Signature of Incharge', textScaleFactor: 1.4),
-                  pw.Text('Signature of HOD', textScaleFactor: 1.4),
-                  pw.Text('Signature of Principal', textScaleFactor: 1.4),
+                  pw.Text('Class Incharge', textScaleFactor: 1.4),
+                  pw.Text('Head Of Department', textScaleFactor: 1.4),
+                  pw.Text('Principal', textScaleFactor: 1.4),
                 ]),
           ),
         ];
@@ -188,14 +182,14 @@ class reportDB {
     final sendReport = await send(equivalentMessage, smtpServer);
   }
 
-  Future sendReport(regNo, name, mobile, presentFN, presentAN, selectedDate,
-      selectedClass) async {
+  Future sendReport(
+      regNo, name, presentFN, presentAN, selectedDate, selectedClass) async {
     try {
       Directory documentDirectory = await getApplicationDocumentsDirectory();
       String documentPath = documentDirectory.path + "/TodayReport.pdf";
 
-      writeOnPdf(regNo, name, mobile, presentFN, presentAN, selectedDate,
-          selectedClass);
+      writeOnPdf(
+          regNo, name, presentFN, presentAN, selectedDate, selectedClass);
 
       await savePdf(documentPath);
       sendMail(documentPath, email, selectedClass);

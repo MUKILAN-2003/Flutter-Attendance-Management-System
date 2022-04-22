@@ -44,6 +44,19 @@ class _UpdateClassAttedenceState extends State<UpdateClassAttedence> {
               for (int i = 0; i < contents.length; i++) {
                 tilesList.add(
                   ListTile(
+                    leading: contents[i].toString().split(" - ")[0] == 'S&H'
+                        ? Image.asset(
+                            'images/' +
+                                contents[i].toString().split(" - ")[1] +
+                                '.png',
+                            fit: BoxFit.fill,
+                          )
+                        : Image.asset(
+                            'images/' +
+                                contents[i].toString().split(" - ")[0] +
+                                '.png',
+                            fit: BoxFit.fill,
+                          ),
                     tileColor: const Color.fromRGBO(199, 68, 109, 0.2),
                     onTap: () {
                       Navigator.push(
@@ -58,8 +71,8 @@ class _UpdateClassAttedenceState extends State<UpdateClassAttedence> {
                     },
                     title: Text(
                       contents[i].toString(),
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(fontSize: 20),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 22),
                     ),
                   ),
                 );
